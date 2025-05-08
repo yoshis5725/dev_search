@@ -10,4 +10,7 @@
     {% endfor %}
 
     <p>{{ project.description }}</p>
+
+    <a href="{% url 'update_project' project.id %}">Update</a>
+    <a href="{% url 'delete_project' project.id %}">Delete</a>
 {% endblock %}

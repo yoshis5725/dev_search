@@ -22,7 +22,8 @@ def single_project(request, pk):
     return render(request, 'projects/single_project.html', context)
 
 
-# Form for creating a new project
+# ---- Form (CRUD) ----
+
 def create_project(request):
     form = ProjectForm()
 
@@ -37,3 +38,33 @@ def create_project(request):
 
     context = {'form': form}
     return render(request, 'projects/project_form.html', context)
+
+
+def update_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    form = ProjectForm(instance=project)
+
+    # Check if the request method is POST
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            # Save the form data to the database
+            form.save()
+            # Redirect to a success page or another view
+            return redirect('all_projects')
+
+    context = {'form': form}
+    return render(request, 'projects/project_form.html', context)
+
+
+def delete_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+
+    # Check if the request method is POST
+    if request.method == 'POST':
+        project.delete()
+        # Redirect to a success page or another view
+        return redirect('all_projects')
+
+    context = {'project': project}
+    return render(request, 'projects/deletion_template.html', context)
