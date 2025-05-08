@@ -4,5 +4,10 @@
 
 {% block content %}
 <h3>{{ project.title }}</h3>
+
+    {% for tag in tags %}
+    	<span style="border: 1px solid #ccc; padding: 5px; margin: 2px;">{{ tag }}</span>
+    {% endfor %}
+
     <p>{{ project.description }}</p>
 {% endblock %}
