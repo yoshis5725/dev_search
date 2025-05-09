@@ -3,6 +3,7 @@
 {% block title %}{{ project.title }}{% endblock %}
 
 {% block content %}
+    <img src="{{ project.featured_image.url }}" alt="{{ project.title }}" style="width: 100%; height: auto;">
 <h3>{{ project.title }}</h3>
 
     {% for tag in tags %}

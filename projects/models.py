@@ -7,6 +7,7 @@ class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
+    featured_image = models.ImageField(upload_to='projects/images/', default='default.jpg', null=True, blank=True)
     tags = models.ManyToManyField('Tag', related_name='projects', blank=True)
     demo_url = models.CharField(null=True, blank=True)
     source_code_url = models.CharField(null=True, blank=True)

@@ -29,7 +29,7 @@ def create_project(request):
 
     # Check if the request method is POST
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             # Save the form data to the database
             form.save()
@@ -46,7 +46,7 @@ def update_project(request, pk):
 
     # Check if the request method is POST
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES ,instance=project)
         if form.is_valid():
             # Save the form data to the database
             form.save()
