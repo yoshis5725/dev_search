@@ -6,11 +6,11 @@ class ProjectForm(forms.ModelForm):
         model = Project
         exclude = ['vote_total', 'vote_ratio']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'tags': forms.CheckboxSelectMultiple(),
         }
-        labels = {
-            'title': 'Project Name',
-            'description': 'Project Description',
-            'tags': 'Project Tags',
-        }
+
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)
+
+        for k,v in self.fields.items():
+            v.widget.attrs.update({'class': 'input'})
