@@ -1,10 +1,13 @@
 import uuid
 
+from django.contrib.auth.models import User
 from django.db import models
+from users.models import Profile
 
 
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
     title = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     featured_image = models.ImageField(upload_to='projects/images/', default='default.jpg', null=True, blank=True)
